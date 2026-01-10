@@ -1,0 +1,33 @@
+.my-bookings {
+  padding: 20px;
+}
+
+.ticket-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.ticket-card h3 {
+  color: #ff5500;
+}
+
+.status.success {
+  color: green;
+  font-weight: bold;
+}
+.download-btn {
+  margin-top: 10px;
+  padding: 8px 14px;
+  background: #0b5ed7;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.download-btn:hover {
+  background: #084298;
+}

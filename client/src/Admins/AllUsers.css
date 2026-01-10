@@ -1,0 +1,115 @@
+/* Container */
+.all-users-container {
+  padding: 24px;
+  background: #f4f6f9;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Heading */
+.all-users-container h2 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Table Wrapper */
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Table Head */
+.users-table thead {
+  background: linear-gradient(135deg, #4b6cb7, #182848);
+}
+
+.users-table thead th {
+  padding: 14px 16px;
+  text-align: left;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Table Body */
+.users-table tbody td {
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #2c3e50;
+  border-bottom: 1px solid #eaeaea;
+}
+
+/* Alternate Row Color */
+.users-table tbody tr:nth-child(even) {
+  background-color: #f8f9fb;
+}
+
+/* Hover Effect */
+.users-table tbody tr:hover {
+  background-color: #eef2ff;
+  transition: background 0.2s ease-in-out;
+}
+
+/* Role Badge Style */
+.users-table td:last-child {
+  font-weight: 600;
+}
+
+.users-table td:last-child::first-letter {
+  text-transform: uppercase;
+}
+
+/* Loading / Empty Text */
+.all-users-container p {
+  font-size: 15px;
+  color: #666;
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .users-table thead {
+    display: none;
+  }
+
+  .users-table,
+  .users-table tbody,
+  .users-table tr,
+  .users-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .users-table tr {
+    margin-bottom: 15px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+
+  .users-table td {
+    padding: 12px 14px;
+    text-align: right;
+    position: relative;
+  }
+
+  .users-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 14px;
+    font-weight: 600;
+    color: #555;
+    text-align: left;
+  }
+}

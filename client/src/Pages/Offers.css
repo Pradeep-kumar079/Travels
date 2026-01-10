@@ -1,0 +1,130 @@
+/* Page container */
+.offers-page {
+  padding: 24px;
+  width: 100%;
+  margin: auto;
+  background: #f6f7f9;
+  min-height: 300px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Title */
+.offers-page h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #1c1c1c;
+}
+
+/* Grid layout */
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Offer card */
+.offer-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  border: 1px solid #ececec;
+}
+
+/* Hover effect */
+.offer-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+}
+
+/* Offer title */
+.offer-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 6px;
+}
+
+/* Description */
+.offer-card p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Coupon box */
+.offer-code {
+  margin: 14px 0;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px dashed #e53935;
+  background: #fff5f5;
+  text-align: center;
+}
+
+.offer-code span {
+  font-size: 12px;
+  color: #777;
+  display: block;
+}
+
+.offer-code strong {
+  font-size: 18px;
+  color: #e53935;
+  letter-spacing: 1px;
+}
+
+/* Discount text */
+.offer-discount {
+  font-size: 15px;
+  font-weight: 600;
+  color: #2e7d32;
+  margin-bottom: 4px;
+}
+
+/* Minimum amount */
+.offer-min {
+  font-size: 13px;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+/* Expiry date */
+.offer-expiry {
+  font-size: 12px;
+  color: #888;
+  margin-top: 6px;
+}
+
+/* Responsive - Tablet */
+@media (max-width: 768px) {
+  .offers-page {
+    padding: 16px;
+  }
+
+  .offers-page h2 {
+    font-size: 24px;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 480px) {
+  .offers-page h2 {
+    font-size: 22px;
+  }
+
+  .offer-card {
+    padding: 14px;
+  }
+
+  .offer-card h3 {
+    font-size: 18px;
+  }
+
+  .offer-code strong {
+    font-size: 16px;
+  }
+}

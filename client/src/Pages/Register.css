@@ -1,0 +1,339 @@
+/* Reset and global styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+/* body {
+  background: linear-gradient(120deg, #d5ebed, #d4e1e2, #d7dfdf);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+} */
+
+/* Main container */
+.register-container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  max-width: 1000px;
+  height: 650px;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  margin: 40px auto;
+  padding: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.register-container:hover {
+  transform: scale(1.01);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* Left-side image */
+.bgimg {
+  width: 50%;
+  height: 100%;
+}
+
+.bgimg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85);
+}
+
+/* Right-side form area */
+.details {
+  width: 50%;
+  padding: 50px 55px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(15px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+
+}
+
+/* Header */
+.details h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #1c3f3a;
+  font-weight: 700;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+
+/* Form container */
+.details form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Input fields */
+.details input {
+  padding: 12px 14px;
+  width: 100%;
+  border: 1.5px solid #cfcfcf;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #fafafa;
+}
+.username p{
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.details input:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 6px rgba(76, 175, 80, 0.4);
+  background-color: #fff;
+  outline: none;
+}
+
+/* Availability message */
+.details p {
+  font-size: 0.9rem;
+  margin-top: 8px;
+  color: #2d3436;
+}
+
+/* Privacy section */
+.privacy {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  color: #555;
+}
+
+.privacy input {
+  accent-color: #4CAF50;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.privacy p{
+  font-size: 0.85rem;
+  user-select: none;
+}
+
+/* Buttons */
+.details button {
+  padding: 12px;
+  background: linear-gradient(135deg, #4CAF50, #2E8B57);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.details button:hover {
+  background: linear-gradient(135deg, #45a049, #1f6f43);
+  transform: scale(1.03);
+}
+
+/* Secondary Login button */
+.login-btn {
+   padding: 12px;
+  background: linear-gradient(135deg, #4CAF50, #2E8B57);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+
+}
+
+.login-btn:hover {
+   background: linear-gradient(135deg, #45a049, #1f6f43);
+  transform: scale(1.03);
+}
+
+/* OR Divider */
+.details h2 {
+  text-align: center;
+  font-size: 1rem;
+  color: #777;
+  margin: 8px 0;
+  font-weight: 500;
+  position: relative;
+}
+
+.details h2::before,
+.details h2::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 35%;
+  height: 1px;
+  background: #ccc;
+}
+
+.details h2::before {
+  left: 0;
+}
+
+.details h2::after {
+  right: 0;
+}
+
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+
+/* login page css*/
+.login-container{
+    display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  max-width: 1000px;
+  height: 650px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  margin: 40px auto;
+  padding: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.login{
+  width: 50%;
+  padding: 50px 55px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(15px);
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+}
+.login h2{
+  text-align: center;
+  font-size: 2.2rem;
+  color: #1c3f3a;
+  font-weight: 700;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+.login input{
+  padding: 12px 14px;
+  margin-bottom: 20px;
+  width: 400px;
+  border: 1.5px solid #cfcfcf;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #fafafa;
+  margin-right: 10px;
+}
+.login-container input:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 6px rgba(76, 175, 80, 0.4);
+  background-color: #fff;
+  outline: none;
+}
+.extra{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.extra a{
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: #4CAF50;
+}
+.extra a:hover{
+  text-decoration: underline;
+}
+.login button{
+  padding: 12px;
+  background: linear-gradient(135deg, #4CAF50, #2E8B57);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin-top: 20px;
+}
+
+.login button:hover {
+  background: linear-gradient(135deg, #45a049, #1f6f43);
+  transform: scale(1.03);
+}
+.divider h2 {
+  text-align: center;
+  font-size: 1rem;
+  color: #777;
+  margin: 20px 0;
+  font-weight: 500;
+  position: relative;
+}
+
+.divider h2::before,
+.divider h2::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 35%;
+  height: 1px;
+  background: #ccc;
+}
+
+.divider h2::before {
+  left: 0;
+}
+
+.divider h2::after {
+  right: 0;
+}
+
+/* Responsive design */
+@media (max-width: 900px) {
+  .register-container {
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+  }
+  .login-container {
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+  }
+
+  .bgimg {
+    width: 100%;
+    height: 250px;
+  }
+
+  .details {
+    width: 100%;
+    padding: 30px 25px;
+  }
+
+  .details h1 {
+    font-size: 1.8rem;
+  }
+
+  .details button {
+    font-size: 0.95rem;
+  }
+}
