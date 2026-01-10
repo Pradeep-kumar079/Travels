@@ -11,7 +11,7 @@ const Offers = () => {
 
  const fetchOffers = async () => {
   try {
-    const res = await axios.get("http://localhost:3000/admin/offers");
+    const res = await axios.get("https://travel-backend-83lh.onrender.com/admin/offers");
     console.log("Offers API response:", res.data); // DEBUG
     setOffers(res.data);
   } catch (error) {

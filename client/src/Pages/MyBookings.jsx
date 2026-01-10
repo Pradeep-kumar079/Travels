@@ -12,7 +12,7 @@ const MyBookings = () => {
     if (!token) return;
 
     axios
-      .get("http://localhost:3000/api/bookings/my-bookings", {
+      .get("https://travel-backend-83lh.onrender.com/api/bookings/my-bookings", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

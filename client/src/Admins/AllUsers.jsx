@@ -9,7 +9,7 @@ const AllUsers = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/admin/all-users");
+        const res = await axios.get("https://travel-backend-83lh.onrender.com/admin/all-users");
         setUsers(res.data.users || []); // assuming backend sends { users: [...] }
       } catch (error) {
         console.error("Error fetching users:", error);

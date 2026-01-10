@@ -23,7 +23,7 @@ const AddOffers = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:3000/admin/add-offers", form);
+      await axios.post("https://travel-backend-83lh.onrender.com/admin/add-offers", form);
 
       alert("🎉 Offer Added Successfully");
 

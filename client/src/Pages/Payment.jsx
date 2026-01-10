@@ -15,7 +15,7 @@ const Payment = () => {
       const token = localStorage.getItem("token");
 
       const res = await axios.post(
-        "http://localhost:3000/api/payment/create-order",
+        "https://travel-backend-83lh.onrender.com/api/payment/create-order",
         {
           amount: totalFare,
           customer: passenger,

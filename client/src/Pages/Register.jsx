@@ -24,7 +24,7 @@ const Register = () => {
       }
       try {
         const res = await axios.get(
-          `http://localhost:3000/check-username/${registerData.username}`
+          `https://travel-backend-83lh.onrender.com/check-username/${registerData.username}`
         );
         setIsAvailable(res.data.available);
       } catch (err) {
@@ -67,7 +67,7 @@ const Register = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/register",
+        "https://travel-backend-83lh.onrender.com/register",
         registerData
       );
       alert(res.data.message || "Registration successful");

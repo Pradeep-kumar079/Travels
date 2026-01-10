@@ -22,7 +22,7 @@ const Login = () => {
     try {
       // ✅ FIX 1: use correct backend URL
       const res = await axios.post(
-        "http://localhost:3000/login",
+        "https://travel-backend-83lh.onrender.com/login",
         loginData,
         { headers: { "Content-Type": "application/json" } }
       );

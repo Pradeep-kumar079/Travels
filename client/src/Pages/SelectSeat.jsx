@@ -21,7 +21,7 @@ const SelectSeat = () => {
     if (!bus?._id) return;
 
     axios
-      .get("http://localhost:3000/api/seats/booked-seats", {
+      .get("https://travel-backend-83lh.onrender.com/api/seats/booked-seats", {
         params: {
           busId: bus._id,
           travelDate,

@@ -28,7 +28,7 @@ const AllBuses = () => {
   const [runDate, setRunDate] = useState("");
   const [formData, setFormData] = useState(initialFormState);
 
-  const API = "http://localhost:3000/admin";
+  const API = "https://travel-backend-83lh.onrender.com/admin";
 
   
   // ================= FETCH =================

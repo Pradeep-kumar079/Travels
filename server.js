@@ -20,8 +20,8 @@ require("./utils/SeatLockCleaner");
 
 // Middleware
 app.use(cors({
-  // origin: process.env.CLIENT_URL || "http://localhost:3000"
-  // origin: "http://localhost:3000" || "http://localhost:3000",
+  // origin: process.env.CLIENT_URL || "https://travel-backend-83lh.onrender.com"
+  // origin: "https://travel-backend-83lh.onrender.com" || "https://travel-backend-83lh.onrender.com",
   origin: process.env.CLIENT_URL || "http://localhost:3000",
   credentials: true
 }));

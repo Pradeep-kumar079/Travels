@@ -19,7 +19,7 @@ const PaymentSuccess = () => {
     const verifyPayment = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/api/payment/verify/${orderId}`
+          `https://travel-backend-83lh.onrender.com/api/payment/verify/${orderId}`
         );
 
         setStatus(res.data.success ? "success" : "failed");

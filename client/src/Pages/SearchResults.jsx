@@ -24,7 +24,7 @@ useEffect(() => {
   });
 
   axios
-    .get("http://localhost:3000/api/buses/search", {
+    .get("https://travel-backend-83lh.onrender.com/api/buses/search", {
       params: { from, to, travelDate },
     })
     .then((res) => {
