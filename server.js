@@ -22,7 +22,7 @@ require("./utils/SeatLockCleaner");
 app.use(cors({
   // origin: process.env.CLIENT_URL || "https://travel-backend-83lh.onrender.com"
   // origin: "https://travel-backend-83lh.onrender.com" || "https://travel-backend-83lh.onrender.com",
-  origin: process.env.CLIENT_URL || "http://localhost:3000",
+  origin: process.env.CLIENT_URL || "https://travels-frontend.onrender.com",
   credentials: true
 }));
 app.use(express.json());
