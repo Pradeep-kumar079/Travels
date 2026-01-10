@@ -10,6 +10,7 @@ const CASHFREE_BASE =
     ? "https://api.cashfree.com"
     : "https://sandbox.cashfree.com";
 
+
 /* ======================================================
    CREATE ORDER + SAVE PENDING BOOKING
 ====================================================== */
@@ -69,7 +70,7 @@ exports.createCashfreeOrder = async (req, res) => {
           customer_email: customer.email || "test@gmail.com",
         },
         order_meta: {
-          return_url: `${process.env.CLIENT_URL}/payment-success?order_id=${orderId}`,
+          return_url: `https://travels-frontend.onrender.com/payment-success?order_id=${orderId}`,
         },
       },
       {
