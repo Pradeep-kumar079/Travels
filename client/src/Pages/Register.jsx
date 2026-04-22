@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { FaCheckCircle } from 'react-icons/fa';
 import { FiEyeOff } from 'react-icons/fi';
-import { Eye,FaCheckCircle,  Loader } from "react-icons/fa";
+import { FaEye } from 'react-icons/fa';
+import { FaCheckCircle,  Loader } from "react-icons/fa";
 
 const Register = () => {
   const [registerData, setRegisterData] = useState({
@@ -191,7 +192,7 @@ const Register = () => {
                 onClick={() => setShowPassword(!showPassword)}
                 tabIndex="-1"
               >
-                {showPassword ? <FiEyeOff size={18} /> : <Eye size={18} />}
+                {showPassword ? <FiEyeOff size={18} /> : <FaEye size={18} />}
               </button>
             </div>
           </div>
