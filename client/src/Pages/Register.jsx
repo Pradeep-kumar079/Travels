@@ -4,7 +4,7 @@ import bgImage from "../Assets/travel-back.jpg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { FaCheckCircle } from 'react-icons/fa';
-import { Eye, EyeOff, FaCheckCircle, XCircle, Loader } from "react-icons/fa";
+import { Eye, EyeOff, FaCheckCircle,  Loader } from "react-icons/fa";
 
 const Register = () => {
   const [registerData, setRegisterData] = useState({
@@ -143,7 +143,7 @@ const Register = () => {
               {registerData.username && checkedUsername === registerData.username && (
                 isAvailable ? 
                   <FaCheckCircle className="status-icon available" /> : 
-                  <XCircle className="status-icon taken" />
+                  <FaCheckCircle className="status-icon taken" />
               )}
             </div>
             {message && (
