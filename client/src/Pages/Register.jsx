@@ -6,7 +6,7 @@ import axios from "axios";
 // import { FaCheckCircle } from 'react-icons/fa';
 import { FiEyeOff } from 'react-icons/fi';
 import { FaEye } from 'react-icons/fa';
-import { FaCheckCircle,  Loader } from "react-icons/fa";
+import { FaCheckCircle,  FaLoader } from "react-icons/fa";
 
 const Register = () => {
   const [registerData, setRegisterData] = useState({
@@ -236,7 +236,7 @@ const Register = () => {
           >
             {isLoading ? (
               <>
-                <Loader className="spinner" size={18} /> Registering...
+                <FaLoader className="spinner" size={18} /> Registering...
               </>
             ) : (
               "Create Account"
