@@ -209,7 +209,7 @@ const Register = () => {
                 required
               />
               {registerData.confirmPassword && !passwordMatch && (
-                <XCircle className="status-icon taken" />
+                <FaCheckCircle className="status-icon taken" />
               )}
               {registerData.confirmPassword && passwordMatch && (
                 <FaCheckCircle className="status-icon available" />
