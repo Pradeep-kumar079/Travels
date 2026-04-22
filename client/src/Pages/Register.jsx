@@ -4,8 +4,8 @@ import bgImage from "../Assets/travel-back.jpg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { FaCheckCircle } from 'react-icons/fa';
-// import { FiEyeOff } from 'react-icons/fi';
-import { Eye, FiEyeOff, FaCheckCircle,  Loader } from "react-icons/fa";
+import { FiEyeOff } from 'react-icons/fi';
+import { Eye,FaCheckCircle,  Loader } from "react-icons/fa";
 
 const Register = () => {
   const [registerData, setRegisterData] = useState({
