@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Register.css";
+import "./Login.css";
 import bgImage from "../Assets/travel-back.jpg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
