@@ -188,9 +188,13 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── OFFERS & FOOTER ── */}
+     <div className="offer">
+       {/* ── OFFERS & FOOTER ── */}
       <Offers />
-      <Footer />
+     </div>
+      <div className="footer">
+        <Footer />
+      </div>
     </div>
   );
 };
