@@ -45,6 +45,8 @@ body {
   position: relative;
   overflow-x: hidden;
   padding: 20px;
+  display: flex;
+  flex-direction: row;
 }
 
 .offers-bg-lines {
