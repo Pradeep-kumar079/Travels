@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Register.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { FiEyeOff, FiEye, FiUser, FiPhone, FiLock, FiCheckCircle, FiXCircle } from "react-icons/fi";
+import { FiEyeOff, FiEye, FiUser, FiPhone, FiLock, FiCheckCircle, FiXCircle, FiArrowRight } from "react-icons/fi";
 import { FaSpinner } from "react-icons/fa";
 
 const Register = () => {
@@ -111,58 +111,62 @@ const Register = () => {
     agreeTerms;
 
   const strengthColor =
-    passwordStrength <= 30 ? "#ff4d4d" :
-    passwordStrength <= 60 ? "#ffaa00" :
-    passwordStrength <= 85 ? "#00cfb4" : "#00e676";
+    passwordStrength <= 30 ? "#d45555" :
+    passwordStrength <= 60 ? "#d4943a" :
+    passwordStrength <= 85 ? "#c46c37" : "#4caf7d";
 
   return (
     <div className="rg-root">
-      {/* Animated background blobs */}
-      <div className="rg-blob rg-blob-1" />
-      <div className="rg-blob rg-blob-2" />
-      <div className="rg-blob rg-blob-3" />
-
       <div className="rg-card">
 
-        {/* LEFT PANEL */}
+        {/* LEFT — Big typographic panel (matches Login) */}
         <div className="rg-panel-left">
           <div className="rg-left-inner">
-            <div className="rg-compass">✦</div>
-            <h1 className="rg-headline">
-              Your next<br />
-              <span className="rg-headline-accent">adventure</span><br />
-              starts here.
-            </h1>
-            <p className="rg-tagline">
-              Discover destinations, build itineraries,<br />
-              and travel smarter — all in one place.
-            </p>
-            <div className="rg-stats">
-              <div className="rg-stat">
-                <span className="rg-stat-num">180+</span>
-                <span className="rg-stat-label">Countries</span>
-              </div>
-              <div className="rg-stat-divider" />
-              <div className="rg-stat">
-                <span className="rg-stat-num">2M+</span>
-                <span className="rg-stat-label">Travelers</span>
-              </div>
-              <div className="rg-stat-divider" />
-              <div className="rg-stat">
-                <span className="rg-stat-num">4.9★</span>
-                <span className="rg-stat-label">Rating</span>
-              </div>
+
+            <div className="rg-wordmark">
+              <span className="rg-dot" />
+              <span className="rg-brand">Wandr</span>
             </div>
+
+            <div className="rg-hero-text">
+              <p className="rg-eyebrow">Join us today,</p>
+              <h1 className="rg-display">
+                Your next<br />
+                adventure<br />
+                <span className="rg-display-stroke">awaits you.</span>
+              </h1>
+            </div>
+
+            <div className="rg-perks">
+              <p className="rg-perk-label">Why travelers love us</p>
+              {[
+                { icon: "✦", text: "180+ countries & destinations" },
+                { icon: "◈", text: "Smart AI-powered itineraries" },
+                { icon: "◉", text: "2M+ happy travelers worldwide" },
+              ].map((p, i) => (
+                <div key={i} className="rg-perk" style={{ animationDelay: `${0.6 + i * 0.15}s` }}>
+                  <span className="rg-perk-icon">{p.icon}</span>
+                  <span className="rg-perk-text">{p.text}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="rg-circle-deco" />
           </div>
         </div>
 
-        {/* RIGHT PANEL */}
+        {/* RIGHT — Register form */}
         <div className="rg-panel-right">
           <div className="rg-form-wrap">
 
             <div className="rg-form-header">
               <h2 className="rg-form-title">Create account</h2>
-              <p className="rg-form-sub">Join millions of happy travelers</p>
+              <p className="rg-form-sub">
+                Already a traveler?{" "}
+                <span className="rg-link" onClick={() => navigate("/login")}>
+                  Sign in
+                </span>
+              </p>
             </div>
 
             <form onSubmit={handleRegister} className="rg-form" noValidate>
@@ -190,6 +194,7 @@ const Register = () => {
                     </span>
                   )}
                 </div>
+                <span className="rg-underline" />
                 {message && (
                   <p className={`rg-hint ${isAvailable ? "rg-hint--ok" : "rg-hint--err"}`}>
                     {message}
@@ -215,6 +220,7 @@ const Register = () => {
                     required
                   />
                 </div>
+                <span className="rg-underline" />
                 {!phoneValid && (
                   <p className="rg-hint rg-hint--err">Phone must be exactly 10 digits</p>
                 )}
@@ -245,15 +251,13 @@ const Register = () => {
                     {showPassword ? <FiEyeOff /> : <FiEye />}
                   </button>
                 </div>
+                <span className="rg-underline" />
                 {registerData.password && (
                   <div className="rg-strength">
                     <div className="rg-strength-track">
                       <div
                         className="rg-strength-fill"
-                        style={{
-                          width: `${passwordStrength}%`,
-                          backgroundColor: strengthColor,
-                        }}
+                        style={{ width: `${passwordStrength}%`, backgroundColor: strengthColor }}
                       />
                     </div>
                     <span className="rg-strength-label" style={{ color: strengthColor }}>
@@ -281,54 +285,47 @@ const Register = () => {
                   />
                   {registerData.confirmPassword && (
                     <span className="rg-status-icon">
-                      {passwordMatch ? (
-                        <FiCheckCircle className="rg-icon-ok" />
-                      ) : (
-                        <FiXCircle className="rg-icon-err" />
-                      )}
+                      {passwordMatch
+                        ? <FiCheckCircle className="rg-icon-ok" />
+                        : <FiXCircle className="rg-icon-err" />}
                     </span>
                   )}
                 </div>
+                <span className="rg-underline" />
                 {registerData.confirmPassword && !passwordMatch && (
                   <p className="rg-hint rg-hint--err">Passwords do not match</p>
                 )}
               </div>
 
               {/* Terms */}
-              <label className="rg-terms">
-                <div className={`rg-checkbox ${agreeTerms ? "rg-checkbox--checked" : ""}`}
-                  onClick={() => setAgreeTerms(!agreeTerms)}
-                >
+              <div className="rg-terms" onClick={() => setAgreeTerms(!agreeTerms)}>
+                <div className={`rg-checkbox ${agreeTerms ? "rg-checkbox--checked" : ""}`}>
                   {agreeTerms && <span className="rg-check-tick">✓</span>}
                 </div>
                 <span className="rg-terms-text">
                   I agree to the <span className="rg-link">Terms of Service</span> and{" "}
                   <span className="rg-link">Privacy Policy</span>
                 </span>
-              </label>
+              </div>
 
               {/* Submit */}
               <button
-                className={`rg-submit ${isFormValid && !isLoading ? "rg-submit--active" : ""}`}
+                className={`rg-submit ${isFormValid ? "rg-submit--active" : ""}`}
                 type="submit"
                 disabled={!isFormValid || isLoading}
               >
                 {isLoading ? (
                   <>
                     <FaSpinner className="rg-spin" />
-                    <span>Creating your account...</span>
+                    <span>Creating account...</span>
                   </>
                 ) : (
-                  <span>Create account →</span>
+                  <>
+                    <span>Create account</span>
+                    <FiArrowRight />
+                  </>
                 )}
               </button>
-
-              <p className="rg-login-cta">
-                Already a traveler?{" "}
-                <span className="rg-link rg-link--bold" onClick={() => navigate("/login")}>
-                  Sign in
-                </span>
-              </p>
 
             </form>
           </div>
