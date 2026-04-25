@@ -684,3 +684,19 @@ body {
     font-size: 11px;
   }
 }
+/* Rupee symbol in discount box */
+.offers-rupee-symbol {
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+  opacity: 0.9;
+  line-height: 1;
+}
+
+/* Rupee symbol in min amount row */
+.offers-min-rupee {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-primary);
+  flex-shrink: 0;
+}

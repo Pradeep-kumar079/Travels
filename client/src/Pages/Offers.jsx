@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { FiCopy, FiCheck, FiCalendar, FiPercent, FiDollarSign, FiTag } from "react-icons/fi";
+import { FiCopy, FiCheck, FiCalendar, FiPercent, FiTag } from "react-icons/fi";
 import { FaSpinner } from "react-icons/fa";
 import "./Offers.css";
 
@@ -18,11 +18,9 @@ const Offers = () => {
     try {
       setIsLoading(true);
       const res = await axios.get("https://travel-backend-83lh.onrender.com/admin/offers");
-      console.log("Offers API response:", res.data);
       setOffers(res.data || []);
       setError(null);
     } catch (error) {
-      console.error("Failed to fetch offers:", error.response?.data || error.message);
       setError("Failed to load offers. Please try again later.");
       setOffers([]);
     } finally {
@@ -110,11 +108,11 @@ const Offers = () => {
                     {active ? "Active" : "Expired"}
                   </div>
 
-                  {/* Discount Icon */}
+                  {/* Discount Box */}
                   <div className="offers-discount-box">
                     {isFlat ? (
                       <>
-                        <FiDollarSign className="offers-icon-main" />
+                        <span className="offers-rupee-symbol">₹</span>
                         <span className="offers-discount-value">{offer.discountValue}</span>
                       </>
                     ) : (
@@ -140,7 +138,7 @@ const Offers = () => {
                     {/* Min Amount */}
                     {offer.minAmount && (
                       <div className="offers-min-amount">
-                        <FiDollarSign className="offers-min-icon" />
+                        <span className="offers-min-rupee">₹</span>
                         <span>Min booking ₹{offer.minAmount}</span>
                       </div>
                     )}
