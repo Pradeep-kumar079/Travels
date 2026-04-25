@@ -1,125 +1,261 @@
-/* ===== PAGE ===== */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ─── PAGE ───────────────────────────────────────────── */
+
 .offer-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f8fafc, #eef2ff);
+  background: #f5f0e8;
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 20px;
-  font-family: "Segoe UI", sans-serif;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif;
+  padding: 24px 16px;
+  position: relative;
+  overflow: hidden;
 }
 
-/* ===== CARD ===== */
+/* warm radial glow */
+.offer-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 8% 90%, rgba(196,108,55,0.18) 0%, transparent 50%),
+    radial-gradient(ellipse at 92% 5%,  rgba(120,80,40,0.12)  0%, transparent 45%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* vertical grid lines */
+.offer-page::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(180,150,100,0.08) 0px,
+    rgba(180,150,100,0.08) 1px,
+    transparent 1px,
+    transparent 16.66%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── CARD ───────────────────────────────────────────── */
+
 .offer-card {
-  background: #ffffff;
+  position: relative;
+  z-index: 1;
+  background: #faf7f2;
   width: 100%;
   max-width: 520px;
-  padding: 30px;
-  border-radius: 14px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-  animation: fadeIn 0.4s ease-in-out;
+  padding: 48px 44px 52px;
+  border-radius: 24px;
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.04),
+    0 8px 24px rgba(0,0,0,0.07),
+    0 32px 80px rgba(0,0,0,0.09);
+  animation: ao-fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+
+@keyframes ao-fadeUp {
+  from { opacity: 0; transform: translateY(36px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── HEADER ─────────────────────────────────────────── */
+
+/* BusGo wordmark above the title */
+.offer-card::before {
+  content: '· BusGo';
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #c46c37;
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
 }
 
 .offer-card h2 {
-  text-align: center;
-  margin-bottom: 5px;
-  color: #1f2937;
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #1c1510;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+  text-align: left;
 }
 
 .subtitle {
-  text-align: center;
   font-size: 14px;
-  color: #6b7280;
-  margin-bottom: 25px;
+  color: #9c8a74;
+  margin-bottom: 36px;
+  text-align: left;
 }
 
-/* ===== FORM ===== */
+/* ─── FORM GROUPS ────────────────────────────────────── */
+
 .form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 18px;
+  gap: 6px;
+  margin-bottom: 26px;
+  position: relative;
+}
+
+.form-group:last-of-type {
+  margin-bottom: 32px;
 }
 
 .form-group label {
-  font-size: 14px;
-  margin-bottom: 6px;
-  color: #374151;
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 600;
+  color: #9c8a74;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: color 0.2s;
 }
+
+/* label turns amber on focus */
+.form-group:focus-within label {
+  color: #c46c37;
+}
+
+/* ─── INPUTS ─────────────────────────────────────────── */
 
 .form-group input,
 .form-group textarea,
 .form-group select {
-  padding: 12px 14px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  font-size: 14px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid #ddd5c5;
+  padding: 10px 0;
+  font-size: 15px;
+  color: #1c1510;
+  font-family: 'Outfit', sans-serif;
   outline: none;
-  transition: border 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s;
+  border-radius: 0;
 }
 
-.form-group textarea {
-  resize: none;
-  height: 80px;
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #c9bfb2;
+  font-weight: 300;
 }
 
+/* hide default focus ring */
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+  border-color: transparent;
+  box-shadow: none;
 }
 
-/* ===== ROW ===== */
+/* animated amber underline */
+.form-group::after {
+  content: '';
+  display: block;
+  height: 2px;
+  background: linear-gradient(90deg, #c46c37, #e8924a);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+  margin-top: -1.5px;
+}
+
+.form-group:focus-within::after {
+  transform: scaleX(1);
+}
+
+/* ─── TEXTAREA ───────────────────────────────────────── */
+
+.form-group textarea {
+  resize: none;
+  height: 72px;
+  line-height: 1.6;
+}
+
+/* ─── SELECT ─────────────────────────────────────────── */
+
+.form-group select {
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23b5a898' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 4px center;
+  padding-right: 24px;
+  cursor: pointer;
+}
+
+/* ─── ROW ────────────────────────────────────────────── */
+
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 15px;
+  gap: 20px;
 }
 
-/* ===== BUTTON ===== */
+/* ─── SUBMIT BUTTON ──────────────────────────────────── */
+
 .submit-btn {
   width: 100%;
-  margin-top: 10px;
-  padding: 14px;
-  border-radius: 10px;
+  height: 52px;
+  border-radius: 12px;
   border: none;
-  font-size: 16px;
-  font-weight: 600;
-  color: white;
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  background: #1c1510;
+  color: #f5f0e8;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Outfit', sans-serif;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  letter-spacing: 0.02em;
 }
 
 .submit-btn:hover {
+  background: #c46c37;
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.4);
+  box-shadow: 0 10px 28px rgba(196,108,55,0.35);
 }
 
 .submit-btn:active {
-  transform: scale(0.97);
+  transform: translateY(0);
+  box-shadow: none;
 }
 
-/* ===== ANIMATION ===== */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* ─── RESPONSIVE ─────────────────────────────────────── */
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 600px) {
   .form-row {
     grid-template-columns: 1fr;
+    gap: 0;
   }
 
   .offer-card {
-    padding: 22px;
+    padding: 40px 28px 44px;
+    border-radius: 20px;
   }
+
+  .offer-card h2 { font-size: 26px; }
+}
+
+@media (max-width: 400px) {
+  .offer-card {
+    padding: 32px 20px 36px;
+    border-radius: 16px;
+  }
+
+  .offer-card h2 { font-size: 24px; }
+  .submit-btn { height: 48px; font-size: 14px; }
 }
