@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FiLogOut, FiMenu, FiX, FiHome, FiUsers,  FiGift, FiFileText, FiTicket, FiSettings } from "react-icons/fi";
+import { FiLogOut, FiMenu, FiX, FiHome, FiUsers,  FiGift, FiFileText, FiSettings } from "react-icons/fi";
 import "./Admin.css";
 import { FaBus } from "react-icons/fa";
+import { FaTicketAlt } from "react-icons/fa";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const Admin = () => {
     { id: "buses", label: "Buses", icon: FaBus, path: "/admin/buses" },
     { id: "offers", label: "Offers", icon: FiGift, path: "/admin/add-offers" },
     { id: "reports", label: "Reports", icon: FiFileText, path: "/admin/reports" },
-    { id: "tickets", label: "Tickets", icon: FiTicket, path: "/admin/tickets" },
+    { id: "tickets", label: "Tickets", icon: FaTicketAlt, path: "/admin/tickets" },
   ];
 
   return (
@@ -142,7 +143,7 @@ const Admin = () => {
 
             <div className="adm-stat-card">
               <div className="adm-stat-icon adm-stat-icon--tickets">
-                <FiTicket />
+                <FaTicketAlt />
               </div>
               <div className="adm-stat-content">
                 <p className="adm-stat-label">Bookings Today</p>
