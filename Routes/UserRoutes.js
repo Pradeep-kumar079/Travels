@@ -7,7 +7,8 @@ const {
   searchBus
 } = require("../controllers/UserController");
 
-// Auth
+
+// Register all
 router.post("/register", registerUser);
 router.post("/login", LoginUser);
 router.get("/check-username/:username", checkUsernameAvailability);
