@@ -7,7 +7,7 @@ const dailyRunningBusSchema = new mongoose.Schema({
     required: true
   },
   runDate: {
-    type: String,
+    type: Date,
     required: true
   }
 }, { timestamps: true });
