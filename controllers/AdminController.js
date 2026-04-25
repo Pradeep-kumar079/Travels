@@ -42,30 +42,82 @@ exports.DeleteBusController = async (req, res) => {
 };
 
  
+// exports.AllowDailyRunController = async (req, res) => {
+//   try {
+//     const { busId, runDate } = req.body;
+
+//     const date = new Date(runDate);
+//     date.setHours(0, 0, 0, 0);
+
+//     const exists = await DailyRunningBus.findOne({
+//       busId,
+//       runDate: { $gte: date, $lte: new Date(date.getTime() + 86400000) }
+//     });
+
+//     if (exists) {
+//       return res.status(400).json({ message: "Already scheduled" });
+//     }
+
+//     const entry = await DailyRunningBus.create({
+//       busId,
+//       runDate: date
+//     });
+
+//     res.json({ entry });
+//   } catch (err) {
+//     res.status(500).json({ message: "Failed to schedule bus" });
+//   }
+// };
 exports.AllowDailyRunController = async (req, res) => {
   try {
     const { busId, runDate } = req.body;
 
-    const date = new Date(runDate);
-    date.setHours(0, 0, 0, 0);
+    console.log("🟢 Admin scheduling bus:", {
+      busId,
+      runDate,
+    });
 
+    // Proper Date conversion
+    const selectedDate = new Date(runDate);
+    selectedDate.setHours(0, 0, 0, 0);
+
+    const nextDate = new Date(selectedDate);
+    nextDate.setDate(nextDate.getDate() + 1);
+
+    // Prevent duplicate scheduling
     const exists = await DailyRunningBus.findOne({
       busId,
-      runDate: { $gte: date, $lte: new Date(date.getTime() + 86400000) }
+      runDate: {
+        $gte: selectedDate,
+        $lt: nextDate,
+      },
     });
 
     if (exists) {
-      return res.status(400).json({ message: "Already scheduled" });
+      return res.status(400).json({
+        message: "Bus already scheduled for this date",
+      });
     }
 
     const entry = await DailyRunningBus.create({
       busId,
-      runDate: date
+      runDate: selectedDate,
     });
 
-    res.json({ entry });
-  } catch (err) {
-    res.status(500).json({ message: "Failed to schedule bus" });
+    console.log("✅ Saved Entry:", entry);
+
+    return res.status(201).json({
+      success: true,
+      message: "Bus scheduled successfully",
+      entry,
+    });
+  } catch (error) {
+    console.error("❌ Schedule Error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to schedule bus",
+    });
   }
 };
 
