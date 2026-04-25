@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FiArrowRight, FiMapPin, FiClock, FiUser, FiPhone, FiMail, FiMapPinPlus, FiCheck } from "react-icons/fi";
+import { FiArrowRight, FiMapPin, FiClock, FiUser, FiPhone, FiMail, FiCheck } from "react-icons/fi";
 import { FaSpinner } from "react-icons/fa";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import "./PassengerDetails.css";
 
 const PassengerDetails = () => {
@@ -233,7 +234,7 @@ const PassengerDetails = () => {
               {/* Address */}
               <div className={`pd-form-group ${focusedField === "address" ? "pd-form-group--focused" : ""}`}>
                 <label className="pd-label">
-                  <FiMapPinPlus className="pd-label-icon" />
+                  <FaMapMarkerAlt className="pd-label-icon" />
                   Permanent Address (Optional)
                 </label>
                 <textarea
