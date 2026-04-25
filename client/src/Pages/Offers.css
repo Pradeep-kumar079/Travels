@@ -44,9 +44,7 @@ body {
   background: var(--color-light);
   position: relative;
   overflow-x: hidden;
-  padding: 20px;
-  display: flex;
-  flex-direction: row;
+  padding: 40px 24px;
 }
 
 .offers-bg-lines {
@@ -79,7 +77,7 @@ body {
 /* ─── CONTAINER ──────────────────────────────────── */
 
 .offers-container {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -87,33 +85,21 @@ body {
 }
 
 @keyframes containerFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ─── HEADER ─────────────────────────────────────── */
 
 .offers-header {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: 52px;
   animation: headerSlideDown 0.6s ease backwards;
 }
 
 @keyframes headerSlideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .offers-header-content {
@@ -131,7 +117,7 @@ body {
 
 @keyframes iconPulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  50%       { transform: scale(1.1); }
 }
 
 .offers-title {
@@ -166,8 +152,8 @@ body {
 
 @keyframes errorShake {
   0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-8px); }
-  75% { transform: translateX(8px); }
+  25%       { transform: translateX(-8px); }
+  75%       { transform: translateX(8px); }
 }
 
 /* ─── LOADING STATE ──────────────────────────────── */
@@ -235,7 +221,7 @@ body {
 
 .offers-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
@@ -256,14 +242,8 @@ body {
 }
 
 @keyframes cardReveal {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .offers-card:hover:not(.offers-card--expired) {
@@ -276,7 +256,8 @@ body {
   opacity: 0.65;
 }
 
-/* Status Badge */
+/* ─── STATUS BADGE ───────────────────────────────── */
+
 .offers-badge {
   position: absolute;
   top: 16px;
@@ -301,7 +282,8 @@ body {
   border: 1px solid rgba(211, 47, 47, 0.3);
 }
 
-/* Discount Box */
+/* ─── DISCOUNT BOX ───────────────────────────────── */
+
 .offers-discount-box {
   width: 100%;
   padding: 24px;
@@ -327,7 +309,8 @@ body {
   letter-spacing: -0.02em;
 }
 
-/* Content */
+/* ─── CARD CONTENT ───────────────────────────────── */
+
 .offers-content {
   display: flex;
   flex-direction: column;
@@ -349,7 +332,7 @@ body {
   line-height: 1.5;
 }
 
-/* Discount Info */
+/* Discount badge */
 .offers-discount-info {
   margin-top: 4px;
 }
@@ -367,7 +350,7 @@ body {
   border: 1px solid rgba(46, 125, 50, 0.2);
 }
 
-/* Min Amount */
+/* Min amount */
 .offers-min-amount {
   display: flex;
   align-items: center;
@@ -386,7 +369,8 @@ body {
   flex-shrink: 0;
 }
 
-/* Coupon Code */
+/* ─── COUPON CODE ────────────────────────────────── */
+
 .offers-coupon {
   margin-top: 8px;
 }
@@ -451,17 +435,17 @@ body {
   font-size: 16px;
 }
 
-/* Expiry Date */
+/* ─── EXPIRY DATE ────────────────────────────────── */
+
 .offers-expiry {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 12px;
   color: var(--color-text-muted);
-  padding: 8px 0;
   border-top: 1px solid var(--color-border);
-  margin-top: 8px;
   padding-top: 12px;
+  margin-top: 8px;
 }
 
 .offers-expiry-icon {
@@ -470,7 +454,8 @@ body {
   flex-shrink: 0;
 }
 
-/* CTA Button */
+/* ─── CTA BUTTON ─────────────────────────────────── */
+
 .offers-use-btn {
   padding: 12px 20px;
   background: var(--color-primary);
@@ -499,20 +484,22 @@ body {
 
 /* ─── RESPONSIVE ─────────────────────────────────── */
 
+/* Large tablets */
 @media (max-width: 1024px) {
+  .offers-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
   .offers-title {
     font-size: 36px;
   }
-
-  .offers-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-  }
 }
 
+/* Tablet */
 @media (max-width: 768px) {
   .offers-root {
-    padding: 16px;
+    padding: 28px 16px;
   }
 
   .offers-header {
@@ -527,8 +514,9 @@ body {
     font-size: 14px;
   }
 
+  /* 2 cards per row on tablet */
   .offers-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
 
@@ -550,13 +538,56 @@ body {
   }
 }
 
-@media (max-width: 480px) {
-  .offers-root {
-    padding: 12px;
+/* Large mobile */
+@media (max-width: 600px) {
+  /* still 2 per row */
+  .offers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 
-  .offers-container {
-    padding: 0;
+  .offers-card {
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .offers-discount-box {
+    padding: 14px;
+  }
+
+  .offers-icon-main {
+    font-size: 24px;
+  }
+
+  .offers-discount-value {
+    font-size: 22px;
+  }
+
+  .offers-card-title {
+    font-size: 15px;
+  }
+
+  .offers-description {
+    font-size: 12px;
+  }
+
+  .offers-badge {
+    top: 10px;
+    right: 10px;
+    font-size: 9px;
+    padding: 4px 8px;
+  }
+
+  .offers-code-text {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+}
+
+/* Small mobile — stack to 1 column */
+@media (max-width: 420px) {
+  .offers-root {
+    padding: 20px 12px;
   }
 
   .offers-header {
@@ -582,7 +613,7 @@ body {
 
   .offers-card {
     padding: 16px;
-    gap: 10px;
+    gap: 12px;
   }
 
   .offers-badge {
@@ -594,7 +625,6 @@ body {
 
   .offers-discount-box {
     padding: 16px;
-    gap: 4px;
   }
 
   .offers-icon-main {
@@ -602,15 +632,11 @@ body {
   }
 
   .offers-discount-value {
-    font-size: 24px;
+    font-size: 26px;
   }
 
   .offers-card-title {
-    font-size: 16px;
-  }
-
-  .offers-description {
-    font-size: 12px;
+    font-size: 17px;
   }
 
   .offers-coupon-box {
@@ -618,48 +644,24 @@ body {
   }
 
   .offers-code-text {
-    font-size: 12px;
-  }
-
-  .offers-copy-btn {
-    padding: 4px;
-  }
-
-  .offers-copy-icon {
-    font-size: 14px;
-  }
-
-  .offers-min-amount {
-    font-size: 12px;
-    padding: 6px 10px;
-  }
-
-  .offers-min-icon {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .offers-use-btn {
     padding: 10px 16px;
     font-size: 12px;
   }
-
-  .offers-expiry {
-    font-size: 11px;
-    padding-top: 8px;
-  }
-
-  .offers-expiry-icon {
-    font-size: 12px;
-  }
 }
 
+/* Very small screens */
 @media (max-width: 360px) {
-  .offers-title {
-    font-size: 20px;
+  .offers-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
-  .offers-grid {
-    gap: 12px;
+  .offers-title {
+    font-size: 20px;
   }
 
   .offers-card {
@@ -671,7 +673,7 @@ body {
   }
 
   .offers-discount-value {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .offers-card-title {
@@ -680,6 +682,5 @@ body {
 
   .offers-code-text {
     font-size: 11px;
-    letter-spacing: 0.5px;
   }
 }
