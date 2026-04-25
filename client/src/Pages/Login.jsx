@@ -40,8 +40,19 @@ const Login = () => {
       if (rememberMe) {
         localStorage.setItem("username", loginData.username);
       }
-      alert(res.data.message || "Login successful");
-      navigate("/home");
+
+      // Store token if returned
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token);
+      }
+
+      // Role-based redirect
+      const role = res.data.role || res.data.user?.role;
+      if (role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/home");
+      }
     } catch (err) {
       setError(err?.response?.data?.message || "Login failed. Try again.");
     } finally {
