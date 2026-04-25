@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const dailyRunningBusSchema = new mongoose.Schema(
+const stoppedBusSchema = new mongoose.Schema(
   {
     busId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -8,9 +8,14 @@ const dailyRunningBusSchema = new mongoose.Schema(
       required: true,
     },
 
-    runDate: {
+    stopDate: {
       type: String,
       required: true,
+    },
+
+    reason: {
+      type: String,
+      default: "",
     },
   },
   {
@@ -19,6 +24,6 @@ const dailyRunningBusSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model(
-  "DailyRunningBus",
-  dailyRunningBusSchema
+  "StoppedBus",
+  stoppedBusSchema
 );

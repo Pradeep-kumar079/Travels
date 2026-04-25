@@ -6,7 +6,7 @@ const {
   AddBusController,
   EditBusController,
   DeleteBusController,
-  AllowDailyRunController,
+  StopBusController,
   GetDailyRunningBuses,
   AddingOffersController,
   GetActiveOffersController
@@ -17,7 +17,7 @@ router.post("/add-newbus", AddBusController);
 router.put("/edit-bus/:id", EditBusController);
 router.delete("/delete-bus/:id", DeleteBusController);
 
-router.post("/allowrun", AllowDailyRunController);
+router.post("/stop-bus", StopBusController);
 router.get("/daily-running", GetDailyRunningBuses);
 
 router.post("/add-offers", AddingOffersController);

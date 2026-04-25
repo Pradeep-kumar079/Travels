@@ -1,4 +1,10 @@
-const DailyRunningBus = require("../model/DailyRunningBus");
+// controllers/BusController.js
+// FINAL FIXED VERSION
+// Logic:
+// Every bus runs daily by default
+// Admin can STOP a bus for selected date
+
+const StoppedBus = require("../model/StoppedBus");
 const Booking = require("../model/BookingModel");
 const BusModel = require("../model/Busmodel");
 
@@ -30,53 +36,38 @@ exports.getBusesWithAvailability = async (req, res) => {
     to = to.trim().toLowerCase();
 
     /*
-      STEP 3 — Since runDate is now STRING
-      example:
-      "2026-04-25"
-
-      We should NOT use Date range query
+      STEP 3 — Find stopped buses
+      for selected travel date
     */
 
-    console.log("📅 Searching for exact date:", travelDate);
-
-    /*
-      STEP 4 — Find buses allowed by admin
-      EXACT MATCH on string date
-    */
-
-    const runningBuses = await DailyRunningBus.find({
-      runDate: travelDate,
+    const stoppedBuses = await StoppedBus.find({
+      stopDate: travelDate,
     });
 
-    console.log("🟢 Running Buses:", runningBuses);
-
-    if (!runningBuses.length) {
-      return res.json({
-        buses: [],
-      });
-    }
+    console.log("🛑 Stopped Buses:", stoppedBuses);
 
     /*
-      STEP 5 — Get bus IDs
+      STEP 4 — Get stopped bus IDs
     */
 
-    const busIds = runningBuses.map(
-      (item) => item.busId
+    const stoppedIds = stoppedBuses.map(
+      (item) => item.busId.toString()
     );
 
     /*
-      STEP 6 — Match route
+      STEP 5 — Find all buses
+      except stopped buses
     */
 
     const matchedBuses = await BusModel.find({
-      _id: {
-        $in: busIds,
-      },
       from,
       to,
+      _id: {
+        $nin: stoppedIds,
+      },
     });
 
-    console.log("🚌 Matched Buses:", matchedBuses);
+    console.log("🚌 Available Route Buses:", matchedBuses);
 
     if (!matchedBuses.length) {
       return res.json({
@@ -85,7 +76,7 @@ exports.getBusesWithAvailability = async (req, res) => {
     }
 
     /*
-      STEP 7 — Seat availability
+      STEP 6 — Calculate available seats
     */
 
     const finalBuses = [];
@@ -111,7 +102,7 @@ exports.getBusesWithAvailability = async (req, res) => {
     }
 
     /*
-      STEP 8 — Final Response
+      STEP 7 — Final response
     */
 
     console.log("✅ Final Buses:", finalBuses);

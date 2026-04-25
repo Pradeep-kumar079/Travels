@@ -1,5 +1,5 @@
 const BusModel = require("../model/Busmodel");
-const DailyRunningBus = require("../model/DailyRunningBus");
+const DailyRunningBus = require("../model/StoppedBus");
 const Offer = require("../model/Offers");
 
 exports.GetAllBuseController = async (req, res) => {
@@ -120,41 +120,40 @@ exports.DeleteBusController = async (req, res) => {
 //     });
 //   }
 // };
-exports.AllowDailyRunController = async (req, res) => {
+exports.StopBusController = async (req, res) => {
   try {
-    const { busId, runDate } = req.body;
+    const { busId, stopDate, reason } = req.body;
 
     const formattedDate =
-      new Date(runDate).toLocaleDateString("en-CA");
+      new Date(stopDate).toLocaleDateString("en-CA");
 
-    console.log("Saving Date:", formattedDate);
-
-    const exists = await DailyRunningBus.findOne({
+    const exists = await StoppedBus.findOne({
       busId,
-      runDate: formattedDate,
+      stopDate: formattedDate,
     });
 
     if (exists) {
       return res.status(400).json({
-        message: "Already scheduled",
+        message: "Bus already stopped for this date",
       });
     }
 
-    const entry = await DailyRunningBus.create({
+    const stopped = await StoppedBus.create({
       busId,
-      runDate: formattedDate,
+      stopDate: formattedDate,
+      reason,
     });
 
     return res.status(201).json({
       success: true,
-      message: "Bus scheduled successfully",
-      entry,
+      message: "Bus stopped successfully",
+      stopped,
     });
   } catch (error) {
     console.error(error);
 
     return res.status(500).json({
-      message: "Failed to schedule bus",
+      message: "Failed to stop bus",
     });
   }
 };
