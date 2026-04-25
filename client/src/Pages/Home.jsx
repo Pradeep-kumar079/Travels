@@ -13,6 +13,7 @@ import Footer from "../Pages/Footer.jsx";
 const Home = () => {
   const [msg, setMsg] = useState("");
   const [searchTerm, setSearchTerm] = useState({ from: "", to: "", date: "" });
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,7 +25,6 @@ const Home = () => {
         console.error("Error fetching message:", error);
       }
     };
-
     fetchMessage();
   }, []);
 
@@ -34,117 +34,163 @@ const Home = () => {
     window.location.reload();
   };
 
-  const MyBookings = () => {
-    navigate("/my-bookings");
+  const handleSearch = () => {
+    if (!searchTerm.from || !searchTerm.to || !searchTerm.date) {
+      alert("Please enter From, To and Date");
+      return;
+    }
+    navigate("/search-results", {
+      state: {
+        from: searchTerm.from.trim().toLowerCase(),
+        to: searchTerm.to.trim().toLowerCase(),
+        travelDate: searchTerm.date,
+      },
+    });
   };
 
-
-const handleSearch = () => {
-  if (!searchTerm.from || !searchTerm.to || !searchTerm.date) {
-    alert("Please enter From, To and Date");
-    return;
-  }
-
-  navigate("/search-results", {
-    state: {
-      from: searchTerm.from.trim().toLowerCase(),
-      to: searchTerm.to.trim().toLowerCase(),
-      travelDate: searchTerm.date
-    }
-  });
-};
-
-
-// const handleSearch = () => {
-//   if (!searchTerm.from || !searchTerm.to || !searchTerm.date) {
-//     alert("Please enter From, To and Date");
-//     return;
-//   }
-
-//   navigate("/search-results", {
-//     state: {
-//       from: searchTerm.from.trim().toLowerCase(),
-//       to: searchTerm.to.trim().toLowerCase(),
-//       travelDate: searchTerm.date,
-//     },
-//   });
-// };
-
-
+  const swapLocations = () => {
+    setSearchTerm((prev) => ({ ...prev, from: prev.to, to: prev.from }));
+  };
 
   return (
-    <div className="home-container">
-      <p>{msg}</p>
+    <div className="hm-root">
 
-      <div className="navbar">
-        <div className="logo">
-          <img src={logo} alt="TravelF Logo" />
-        </div>
-        <div className="links">
-          <div className="contact">
-            <FontAwesomeIcon icon={faHeadset} />
-            <Link to="/contact"><p>Contact Us</p></Link>
-          </div>
-          <div className="bookings" onClick={MyBookings}>
-            <FontAwesomeIcon icon={faTicket} />
-            <p>My Bookings</p>
-          </div>
-          <div className="account">
-            <FontAwesomeIcon icon={faUser} />
-            <Link to="/profile"><p>My Account</p></Link>
-          </div>
-
-          <div className="logout" onClick={LogOut}>
-            <p>Log Out</p>
-          </div>
-        </div>
+      {/* BG lines decoration */}
+      <div className="hm-lines" aria-hidden="true">
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="hm-line" />
+        ))}
       </div>
 
-      <div className="poster">
-        <img src={posters} alt="Travel Poster" />
-      </div>
+      {/* ── NAVBAR ── */}
+      <nav className="hm-nav">
+        <div className="hm-nav-inner">
 
-      <div className="search">
-        <h3>Search the bus</h3>
-          <div className="searchcol">
-              <div className="from">
-                <input
+          <div className="hm-logo">
+            <img src={logo} alt="Wandr logo" />
+          </div>
+
+          {/* Desktop links */}
+          <div className="hm-nav-links">
+            <Link to="/contact" className="hm-nav-item">
+              <FontAwesomeIcon icon={faHeadset} className="hm-nav-icon" />
+              <span>Contact</span>
+            </Link>
+            <button className="hm-nav-item" onClick={() => navigate("/my-bookings")}>
+              <FontAwesomeIcon icon={faTicket} className="hm-nav-icon" />
+              <span>My Bookings</span>
+            </button>
+            <Link to="/profile" className="hm-nav-item">
+              <FontAwesomeIcon icon={faUser} className="hm-nav-icon" />
+              <span>Account</span>
+            </Link>
+            <button className="hm-nav-item hm-nav-logout" onClick={LogOut}>
+              <span>Log out</span>
+            </button>
+          </div>
+
+          {/* Hamburger for mobile */}
+          <button
+            className={`hm-hamburger ${menuOpen ? "hm-hamburger--open" : ""}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span /><span /><span />
+          </button>
+        </div>
+
+        {/* Mobile drawer */}
+        {menuOpen && (
+          <div className="hm-mobile-menu">
+            <Link to="/contact" className="hm-mob-item" onClick={() => setMenuOpen(false)}>
+              <FontAwesomeIcon icon={faHeadset} /> Contact
+            </Link>
+            <button className="hm-mob-item" onClick={() => { navigate("/my-bookings"); setMenuOpen(false); }}>
+              <FontAwesomeIcon icon={faTicket} /> My Bookings
+            </button>
+            <Link to="/profile" className="hm-mob-item" onClick={() => setMenuOpen(false)}>
+              <FontAwesomeIcon icon={faUser} /> Account
+            </Link>
+            <button className="hm-mob-item hm-mob-logout" onClick={LogOut}>
+              Log out
+            </button>
+          </div>
+        )}
+      </nav>
+
+      {/* ── HERO ── */}
+      <section className="hm-hero">
+        <div className="hm-hero-img-wrap">
+          <img src={posters} alt="Travel destination" className="hm-hero-img" />
+          <div className="hm-hero-overlay" />
+        </div>
+
+        <div className="hm-hero-content">
+          <p className="hm-hero-eyebrow">Your journey begins here</p>
+          <h1 className="hm-hero-title">
+            Find your<br />
+            <span className="hm-hero-stroke">perfect ride.</span>
+          </h1>
+          <p className="hm-hero-sub">
+            Book intercity buses fast, easy, and affordable.
+          </p>
+        </div>
+      </section>
+
+      {/* ── SEARCH CARD ── */}
+      <section className="hm-search-wrap">
+        <div className="hm-search-card">
+          <p className="hm-search-label">Search buses</p>
+
+          <div className="hm-search-row">
+
+            <div className="hm-search-field">
+              <label className="hm-field-label">From</label>
+              <input
+                className="hm-input"
                 type="text"
-                placeholder="From"
+                placeholder="Departure city"
                 value={searchTerm.from}
                 onChange={(e) => setSearchTerm({ ...searchTerm, from: e.target.value })}
-                />
-              </div>
+              />
+            </div>
 
-              <div className="exchange">
+            <button className="hm-swap" onClick={swapLocations} title="Swap locations">
               <FaRightLeft />
-              </div>
+            </button>
 
-              <div className="to">
-                <input
+            <div className="hm-search-field">
+              <label className="hm-field-label">To</label>
+              <input
+                className="hm-input"
                 type="text"
-                placeholder="To"
+                placeholder="Arrival city"
                 value={searchTerm.to}
                 onChange={(e) => setSearchTerm({ ...searchTerm, to: e.target.value })}
-                />
-              </div>
+              />
+            </div>
 
-              <div className="date">
-                <input
+            <div className="hm-search-field">
+              <label className="hm-field-label">Date</label>
+              <input
+                className="hm-input hm-input-date"
                 type="date"
                 value={searchTerm.date}
                 onChange={(e) => setSearchTerm({ ...searchTerm, date: e.target.value })}
-                />
-              </div>
+              />
+            </div>
+
+            <button className="hm-search-btn" onClick={handleSearch}>
+              Search <span className="hm-search-arrow">→</span>
+            </button>
 
           </div>
-        <button onClick={handleSearch}>Search</button>
-      </div>
+        </div>
+      </section>
 
-    <Offers />
-
-    <Footer />
-      
+      {/* ── OFFERS & FOOTER ── */}
+      <Offers />
+      <Footer />
     </div>
   );
 };
