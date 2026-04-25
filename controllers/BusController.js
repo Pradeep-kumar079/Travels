@@ -4,6 +4,14 @@
 // Every bus runs daily by default
 // Admin can STOP a bus for selected date
 
+// const StoppedBus = require("../model/StoppedBus");
+// const Booking = require("../model/BookingModel");
+// const BusModel = require("../model/Busmodel");
+
+// FINAL PROFESSIONAL VERSION
+// Every bus runs daily by default
+// Admin only stops buses for selected dates
+
 const StoppedBus = require("../model/StoppedBus");
 const Booking = require("../model/BookingModel");
 const BusModel = require("../model/Busmodel");
@@ -37,7 +45,11 @@ exports.getBusesWithAvailability = async (req, res) => {
 
     /*
       STEP 3 — Find stopped buses
-      for selected travel date
+      for selected date
+
+      Logic:
+      All buses run by default
+      except stopped buses
     */
 
     const stoppedBuses = await StoppedBus.find({
@@ -55,8 +67,8 @@ exports.getBusesWithAvailability = async (req, res) => {
     );
 
     /*
-      STEP 5 — Find all buses
-      except stopped buses
+      STEP 5 — Find route buses
+      excluding stopped buses
     */
 
     const matchedBuses = await BusModel.find({
@@ -67,7 +79,7 @@ exports.getBusesWithAvailability = async (req, res) => {
       },
     });
 
-    console.log("🚌 Available Route Buses:", matchedBuses);
+    console.log("🚌 Available Buses:", matchedBuses);
 
     if (!matchedBuses.length) {
       return res.json({
@@ -76,7 +88,7 @@ exports.getBusesWithAvailability = async (req, res) => {
     }
 
     /*
-      STEP 6 — Calculate available seats
+      STEP 6 — Calculate seat availability
     */
 
     const finalBuses = [];
