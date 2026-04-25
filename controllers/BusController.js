@@ -1,73 +1,6 @@
- 
 const DailyRunningBus = require("../model/DailyRunningBus");
 const Booking = require("../model/BookingModel");
 const BusModel = require("../model/Busmodel");
-
-// exports.getBusesWithAvailability = async (req, res) => {
-//   try {
-//     let { from, to, travelDate } = req.query;
-
-//     if (!from || !to || !travelDate) {
-//       return res.json({ buses: [] });
-//     }
-
-//     // ✅ normalize route
-//     from = from.trim().toLowerCase();
-//     to = to.trim().toLowerCase();
-
-//     // ✅ DATE RANGE (CRITICAL FIX)
-//     const start = new Date(travelDate);
-//     start.setHours(0, 0, 0, 0);
-
-//     const end = new Date(travelDate);
-//     end.setHours(23, 59, 59, 999);
-
-//     // 1️⃣ find allowed buses for that day
-//     const running = await DailyRunningBus.find({
-//       runDate: { $gte: start, $lte: end }
-//     });
-
-//     if (!running.length) {
-//       return res.json({ buses: [] });
-//     }
-
-//     const busIds = running.map(r => r.busId);
-
-//     // 2️⃣ match route
-//     const buses = await BusModel.find({
-//       _id: { $in: busIds },
-//       from,
-//       to
-//     });
-
-//     const results = [];
-
-//     // 3️⃣ seat availability
-//     for (const bus of buses) {
-//       const bookings = await Booking.find({
-//         busId: bus._id,
-//         travelDate: { $gte: start, $lte: end },
-//         paymentStatus: "PAID"
-//       });
-
-//       const bookedCount = bookings.reduce(
-//         (sum, b) => sum + b.seats.length,
-//         0
-//       );
-
-//       results.push({
-//         ...bus.toObject(),
-//         available_seats: bus.capacity - bookedCount
-//       });
-//     }
-
-//     res.json({ buses: results });
-//   } catch (err) {
-//     console.error("Bus search error:", err);
-//     res.status(500).json({ buses: [] });
-//   }
-// };
-
 
 exports.getBusesWithAvailability = async (req, res) => {
   try {
@@ -91,37 +24,28 @@ exports.getBusesWithAvailability = async (req, res) => {
 
     /*
       STEP 2 — Normalize route values
-      (same as admin add bus)
     */
 
     from = from.trim().toLowerCase();
     to = to.trim().toLowerCase();
 
     /*
-      STEP 3 — Proper date range for whole day
+      STEP 3 — Since runDate is now STRING
+      example:
+      "2026-04-25"
+
+      We should NOT use Date range query
     */
 
-    const start = new Date(travelDate);
-    start.setHours(0, 0, 0, 0);
-
-    const end = new Date(travelDate);
-    end.setHours(23, 59, 59, 999);
-
-    console.log("📅 Date Range:", {
-      start,
-      end,
-    });
+    console.log("📅 Searching for exact date:", travelDate);
 
     /*
-      STEP 4 — Find buses allowed to run
-      by admin for that date
+      STEP 4 — Find buses allowed by admin
+      EXACT MATCH on string date
     */
 
     const runningBuses = await DailyRunningBus.find({
-      runDate: {
-        $gte: start,
-        $lte: end,
-      },
+      runDate: travelDate,
     });
 
     console.log("🟢 Running Buses:", runningBuses);
@@ -141,7 +65,7 @@ exports.getBusesWithAvailability = async (req, res) => {
     );
 
     /*
-      STEP 6 — Match route buses
+      STEP 6 — Match route
     */
 
     const matchedBuses = await BusModel.find({
@@ -161,7 +85,7 @@ exports.getBusesWithAvailability = async (req, res) => {
     }
 
     /*
-      STEP 7 — Calculate available seats
+      STEP 7 — Seat availability
     */
 
     const finalBuses = [];
@@ -169,10 +93,7 @@ exports.getBusesWithAvailability = async (req, res) => {
     for (const bus of matchedBuses) {
       const bookings = await Booking.find({
         busId: bus._id,
-        travelDate: {
-          $gte: start,
-          $lte: end,
-        },
+        travelDate,
         paymentStatus: "PAID",
       });
 
@@ -190,7 +111,7 @@ exports.getBusesWithAvailability = async (req, res) => {
     }
 
     /*
-      STEP 8 — Final response
+      STEP 8 — Final Response
     */
 
     console.log("✅ Final Buses:", finalBuses);

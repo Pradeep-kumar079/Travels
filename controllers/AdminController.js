@@ -68,43 +68,82 @@ exports.DeleteBusController = async (req, res) => {
 //     res.status(500).json({ message: "Failed to schedule bus" });
 //   }
 // };
+// exports.AllowDailyRunController = async (req, res) => {
+//   try {
+//     const { busId, runDate } = req.body;
+
+//     console.log("🟢 Admin scheduling bus:", {
+//       busId,
+//       runDate,
+//     });
+
+//     // Proper Date conversion
+//     const selectedDate = new Date(runDate);
+//     selectedDate.setHours(0, 0, 0, 0);
+
+//     const nextDate = new Date(selectedDate);
+//     nextDate.setDate(nextDate.getDate() + 1);
+
+//     // Prevent duplicate scheduling
+//     const exists = await DailyRunningBus.findOne({
+//       busId,
+//       runDate: {
+//         $gte: selectedDate,
+//         $lt: nextDate,
+//       },
+//     });
+
+//     if (exists) {
+//       return res.status(400).json({
+//         message: "Bus already scheduled for this date",
+//       });
+//     }
+
+//     const entry = await DailyRunningBus.create({
+//       busId,
+//       runDate: selectedDate,
+//     });
+
+//     console.log("✅ Saved Entry:", entry);
+
+//     return res.status(201).json({
+//       success: true,
+//       message: "Bus scheduled successfully",
+//       entry,
+//     });
+//   } catch (error) {
+//     console.error("❌ Schedule Error:", error);
+
+//     return res.status(500).json({
+//       success: false,
+//       message: "Failed to schedule bus",
+//     });
+//   }
+// };
 exports.AllowDailyRunController = async (req, res) => {
   try {
     const { busId, runDate } = req.body;
 
-    console.log("🟢 Admin scheduling bus:", {
-      busId,
-      runDate,
-    });
+    const formattedDate =
+      new Date(runDate).toLocaleDateString("en-CA");
 
-    // Proper Date conversion
-    const selectedDate = new Date(runDate);
-    selectedDate.setHours(0, 0, 0, 0);
+    console.log("Saving Date:", formattedDate);
 
-    const nextDate = new Date(selectedDate);
-    nextDate.setDate(nextDate.getDate() + 1);
-
-    // Prevent duplicate scheduling
     const exists = await DailyRunningBus.findOne({
       busId,
-      runDate: {
-        $gte: selectedDate,
-        $lt: nextDate,
-      },
+      runDate: formattedDate,
     });
 
     if (exists) {
       return res.status(400).json({
-        message: "Bus already scheduled for this date",
+        message: "Already scheduled",
       });
     }
 
     const entry = await DailyRunningBus.create({
       busId,
-      runDate: selectedDate,
+      runDate: formattedDate,
     });
-
-    console.log("✅ Saved Entry:", entry);
 
     return res.status(201).json({
       success: true,
@@ -112,10 +151,9 @@ exports.AllowDailyRunController = async (req, res) => {
       entry,
     });
   } catch (error) {
-    console.error("❌ Schedule Error:", error);
+    console.error(error);
 
     return res.status(500).json({
-      success: false,
       message: "Failed to schedule bus",
     });
   }

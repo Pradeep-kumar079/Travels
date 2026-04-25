@@ -1,15 +1,24 @@
 const mongoose = require("mongoose");
 
-const dailyRunningBusSchema = new mongoose.Schema({
-  busId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "BusModel",
-    required: true
-  },
-  runDate: {
-    type: Date,
-    required: true
-  }
-}, { timestamps: true });
+const dailyRunningBusSchema = new mongoose.Schema(
+  {
+    busId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "BusModel",
+      required: true,
+    },
 
-module.exports = mongoose.model("DailyRunningBus", dailyRunningBusSchema);
+    runDate: {
+      type: String,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+module.exports = mongoose.model(
+  "DailyRunningBus",
+  dailyRunningBusSchema
+);
