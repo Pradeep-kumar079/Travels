@@ -1,131 +1,93 @@
-/* ===== PAGE ===== */
-.payment-page {
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Outfit:wght@300;400;500;600&display=swap');
+
+/* ─── CSS VARIABLES ──────────────────────────────── */
+
+:root {
+  --color-primary: #c46c37;
+  --color-dark: #1c1510;
+  --color-light: #f5f0e8;
+  --color-secondary: #e8924a;
+  --color-text: #3a3028;
+  --color-text-muted: #9c8a74;
+  --color-border: #ddd5c5;
+  --color-bg: #faf7f2;
+  --color-bg-dark: #f8f5f0;
+  --color-success: #2e7d32;
+  --color-error: #d32f2f;
+
+  --transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ─── RESET ──────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--color-light);
+  color: var(--color-text);
+}
+
+/* ─── ROOT ───────────────────────────────────────── */
+
+.py-root {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f8fafc, #eef2ff);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: var(--color-light);
+  position: relative;
+  overflow-x: hidden;
   padding: 20px;
-  font-family: "Inter", "Segoe UI", sans-serif;
-}
-
-/* ===== CARD ===== */
-.payment-card {
-  background: #ffffff;
-  width: 100%;
-  max-width: 420px;
-  padding: 26px;
-  border-radius: 16px;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
-  animation: fadeUp 0.4s ease;
-}
-
-/* ===== TITLE ===== */
-.payment-card h2 {
-  text-align: center;
-  font-size: 22px;
-  margin-bottom: 20px;
-  color: #1f2937;
-}
-
-/* ===== TRIP INFO ===== */
-.trip-info {
-  text-align: center;
-}
-
-.trip-info h3 {
-  font-size: 18px;
-  color: #111827;
-}
-
-.trip-info .route {
-  font-size: 15px;
-  color: #374151;
-  margin: 4px 0;
-}
-
-.trip-info .date {
-  font-size: 14px;
-  color: #6b7280;
-}
-
-/* ===== DIVIDER ===== */
-.divider {
-  height: 1px;
-  background: #e5e7eb;
-  margin: 18px 0;
-}
-
-/* ===== DETAILS ===== */
-.details div {
   display: flex;
-  justify-content: space-between;
-  margin: 10px 0;
-  font-size: 15px;
-  color: #374151;
+  align-items: center;
+  justify-content: center;
 }
 
-.details strong {
-  color: #111827;
+.py-bg-lines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.2;
 }
 
-/* ===== TOTAL ===== */
-.total-box {
-  background: #fef2f2;
-  border: 1px solid #fee2e2;
-  border-radius: 12px;
-  padding: 16px;
-  text-align: center;
-  margin: 20px 0;
-}
-
-.total-box span {
-  font-size: 14px;
-  color: #b91c1c;
-}
-
-.total-box h1 {
-  margin-top: 6px;
-  font-size: 28px;
-  color: #dc2626;
-}
-
-/* ===== BUTTON ===== */
-.pay-btn {
+.py-bg-line {
+  position: absolute;
   width: 100%;
-  padding: 14px;
-  font-size: 16px;
-  font-weight: 600;
-  background: linear-gradient(135deg, #16a34a, #15803d);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(196, 108, 55, 0.3), transparent);
+  animation: bgLineSlide 1.8s ease forwards;
+  opacity: 0;
 }
 
-.pay-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(22, 163, 74, 0.35);
+.py-bg-line:nth-child(1) { top: 20%; }
+.py-bg-line:nth-child(2) { top: 40%; }
+.py-bg-line:nth-child(3) { top: 60%; }
+.py-bg-line:nth-child(4) { top: 80%; }
+
+@keyframes bgLineSlide {
+  to { opacity: 1; }
 }
 
-.pay-btn:active {
-  transform: scale(0.98);
+/* ─── CONTAINER ──────────────────────────────────── */
+
+.py-container {
+  max-width: 1100px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  animation: containerFadeIn 0.6s ease 0.1s backwards;
 }
 
-/* ===== SECURE NOTE ===== */
-.secure-note {
-  text-align: center;
-  font-size: 13px;
-  color: #6b7280;
-  margin-top: 12px;
-}
-
-/* ===== ANIMATION ===== */
-@keyframes fadeUp {
+@keyframes containerFadeIn {
   from {
     opacity: 0;
-    transform: translateY(15px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -133,17 +95,792 @@
   }
 }
 
-/* ===== MOBILE ===== */
-@media (max-width: 480px) {
-  .payment-card {
-    padding: 20px;
+/* ─── HEADER ─────────────────────────────────────── */
+
+.py-header {
+  text-align: center;
+  margin-bottom: 40px;
+  animation: headerSlideDown 0.6s ease backwards;
+}
+
+@keyframes headerSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.py-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--color-dark);
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.py-subtitle {
+  font-size: 15px;
+  color: var(--color-text-muted);
+}
+
+/* ─── LAYOUT ─────────────────────────────────────── */
+
+.py-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 28px;
+}
+
+/* ─── DETAILS SECTION ────────────────────────────── */
+
+.py-details-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: detailsSlideUp 0.6s ease 0.15s backwards;
+}
+
+@keyframes detailsSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── CARD ───────────────────────────────────────── */
+
+.py-card {
+  background: white;
+  border-radius: 14px;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.py-trip-card {
+  background: linear-gradient(135deg, rgba(196, 108, 55, 0.04), rgba(232, 146, 74, 0.03));
+  border: 1px solid rgba(196, 108, 55, 0.1);
+}
+
+.py-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-bg-dark);
+}
+
+/* ─── JOURNEY DISPLAY ────────────────────────────– */
+
+.py-journey {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.py-journey-point {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  flex: 1;
+  min-width: 120px;
+}
+
+.py-journey-icon {
+  font-size: 18px;
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.py-journey-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  margin: 0;
+  font-weight: 600;
+}
+
+.py-journey-city {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.py-journey-arrow {
+  font-size: 18px;
+  color: var(--color-primary);
+  flex-shrink: 0;
+  animation: arrowPulse 2s ease-in-out infinite;
+}
+
+@keyframes arrowPulse {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(3px); }
+}
+
+/* ─── TRIP INFO ──────────────────────────────────── */
+
+.py-trip-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.py-trip-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  background: white;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.py-trip-label {
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  font-size: 11px;
+}
+
+.py-trip-value {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.py-trip-icon {
+  font-size: 16px;
+  color: var(--color-primary);
+}
+
+/* ─── INFO GRID ──────────────────────────────────– */
+
+.py-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.py-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px;
+  background: var(--color-bg);
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+}
+
+.py-info-icon {
+  font-size: 18px;
+  color: var(--color-primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.py-info-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: white;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.py-info-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.py-info-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+/* ─── SEATS DISPLAY ──────────────────────────────── */
+
+.py-seats-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.py-seat-badge {
+  display: inline-block;
+  padding: 8px 14px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: white;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ─── PAYMENT SECTION ────────────────────────────– */
+
+.py-payment-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: paymentSlideUp 0.6s ease 0.2s backwards;
+}
+
+@keyframes paymentSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.py-price-card {
+  position: sticky;
+  top: 20px;
+}
+
+/* ─── PRICE BREAKDOWN ────────────────────────────── */
+
+.py-price-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.py-price-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.py-price-item--taxes {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.py-price-label {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.py-price-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.py-divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: 4px 0;
+}
+
+.py-total-amount {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.py-total-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.py-total-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* ─── PAYMENT METHOD ─────────────────────────────– */
+
+.py-payment-method {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.py-method-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.py-method-item--active {
+  background: rgba(196, 108, 55, 0.05);
+  border-color: var(--color-primary);
+}
+
+.py-method-radio {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: white;
+  transition: var(--transition);
+}
+
+.py-method-item--active .py-method-radio {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.py-method-check {
+  font-size: 12px;
+  color: white;
+}
+
+.py-method-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.py-method-desc {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin: 2px 0 0 0;
+}
+
+/* ─── SECURITY BOX ───────────────────────────────– */
+
+.py-security-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: rgba(46, 125, 50, 0.08);
+  border: 1px solid rgba(46, 125, 50, 0.2);
+  border-radius: 10px;
+}
+
+.py-security-icon {
+  font-size: 20px;
+  color: var(--color-success);
+  flex-shrink: 0;
+}
+
+.py-security-content {
+  flex: 1;
+}
+
+.py-security-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-success);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.py-security-text {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin: 2px 0 0 0;
+}
+
+/* ─── PAY BUTTON ─────────────────────────────────── */
+
+.py-pay-btn {
+  width: 100%;
+  padding: 16px 20px;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.py-pay-btn:hover:not(:disabled) {
+  background: var(--color-secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(196, 108, 55, 0.3);
+}
+
+.py-pay-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.py-pay-btn:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.py-pay-btn--loading {
+  opacity: 0.9;
+}
+
+.py-lock-icon {
+  font-size: 16px;
+}
+
+.py-spin {
+  animation: spinIt 1s linear infinite;
+  font-size: 14px;
+}
+
+@keyframes spinIt {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── POLICY TEXT ────────────────────────────────── */
+
+.py-policy {
+  font-size: 11px;
+  text-align: center;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+/* ─── ERROR STATE ────────────────────────────────── */
+
+.py-error {
+  background: white;
+  border-radius: 14px;
+  padding: 60px 40px;
+  text-align: center;
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.py-error-icon {
+  font-size: 56px;
+  color: var(--color-error);
+  opacity: 0.3;
+}
+
+.py-error p {
+  font-size: 16px;
+  color: var(--color-text-muted);
+}
+
+.py-error button {
+  padding: 12px 32px;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.py-error button:hover {
+  background: var(--color-secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(196, 108, 55, 0.3);
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .py-title {
+    font-size: 28px;
   }
 
-  .total-box h1 {
+  .py-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .py-payment-section {
+    order: -1;
+  }
+
+  .py-price-card {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .py-root {
+    padding: 16px;
+  }
+
+  .py-header {
+    margin-bottom: 28px;
+  }
+
+  .py-title {
     font-size: 24px;
   }
 
-  .pay-btn {
-    font-size: 15px;
+  .py-card {
+    padding: 18px;
+  }
+
+  .py-card-title {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .py-info-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .py-trip-info {
+    grid-template-columns: 1fr;
+  }
+
+  .py-journey {
+    gap: 8px;
+  }
+
+  .py-journey-point {
+    flex: 1;
+    min-width: 100px;
+  }
+
+  .py-pay-btn {
+    padding: 14px 16px;
+    font-size: 13px;
+    gap: 8px;
+  }
+
+  .py-policy {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .py-root {
+    padding: 12px;
+  }
+
+  .py-container {
+    padding: 0;
+  }
+
+  .py-header {
+    margin-bottom: 20px;
+  }
+
+  .py-title {
+    font-size: 22px;
+  }
+
+  .py-subtitle {
+    font-size: 13px;
+  }
+
+  .py-layout {
+    gap: 16px;
+  }
+
+  .py-details-section {
+    gap: 14px;
+  }
+
+  .py-payment-section {
+    gap: 12px;
+  }
+
+  .py-card {
+    padding: 14px;
+  }
+
+  .py-card-title {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+
+  .py-journey {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .py-journey-point {
+    width: 100%;
+  }
+
+  .py-journey-arrow {
+    transform: rotate(90deg);
+  }
+
+  .py-info-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .py-info-item {
+    padding: 10px;
+  }
+
+  .py-trip-info {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .py-trip-item {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .py-seats-display {
+    gap: 6px;
+  }
+
+  .py-seat-badge {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .py-price-item {
+    padding: 8px 0;
+  }
+
+  .py-price-label {
+    font-size: 12px;
+  }
+
+  .py-price-value {
+    font-size: 14px;
+  }
+
+  .py-total-value {
+    font-size: 20px;
+  }
+
+  .py-method-item {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .py-method-name {
+    font-size: 12px;
+  }
+
+  .py-security-box {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .py-pay-btn {
+    padding: 12px 14px;
+    font-size: 12px;
+  }
+
+  .py-policy {
+    font-size: 9px;
+  }
+
+  .py-error {
+    padding: 40px 20px;
+  }
+
+  .py-error-icon {
+    font-size: 48px;
+  }
+
+  .py-error p {
+    font-size: 14px;
+  }
+
+  .py-error button {
+    padding: 10px 24px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 360px) {
+  .py-title {
+    font-size: 20px;
+  }
+
+  .py-card {
+    padding: 12px;
+  }
+
+  .py-info-item {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .py-info-badge {
+    width: 36px;
+    height: 36px;
+    font-size: 11px;
+  }
+
+  .py-pay-btn {
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+
+  .py-total-value {
+    font-size: 18px;
+  }
+
+  .py-price-value {
+    font-size: 13px;
   }
 }
